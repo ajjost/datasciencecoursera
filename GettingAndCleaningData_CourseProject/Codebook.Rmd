@@ -1,0 +1,138 @@
+---
+title: "Codebook"
+author: "AimeeJost"
+date: "October 4, 2015"
+output: html_document
+---
+
+
+==================================================================
+
+# Data Sets
+
+## Original Data
+All data comes from the UCI HAR Dataset^1^
+
+* [Data](https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip)
+* [Explanation of Data](http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones)
+
+For a complete guide to the original dataset, please see the README.txt and features_info.txt files in the zipped dataset file.
+
+## Raw Data
+
+> "rawdata.txt"
+
+The raw data set was created by merging the test and train files from the original UCI HAR data set and selecting only columns which referred to the mean or std of the data collected. This was done by:
+
+1. Reading original test and train files
+2. Assigning column names from given features.text file
+3. Combining the subjectIDs to their data and the activity to its respective activityID
+4. rbinding the test and train files
+5. filtering the created data frame to include only subjectID, activity and the measurement columns containing the mean or standard deviation (excluding columns such as mean frequency which were not actual mean calculations of the measurements) calculated in the original data. 
+
+The raw data contains 10299 objects of 68 variables.
+
+
+## Tidy Data
+
+> "MeanTidyData.txt"
+
+The tidy data was created following the general rules set out by [Hadley Wikham](http://vita.had.co.nz/papers/tidy-data.pdf) with respect to the requested output required for further analysis.
+
+Data columns use camelCase for readibility. 
+
+Column names were changed from their appearance in the original data in the following manner:
+
+1. Replaced "bodybody" with "body"
+2. Replaced "main" with "Main" to follow camelCase
+3. Replaced "std" with "Std" to follow camelCase
+4. Removed dashes -
+5. Removed parenthesis ()
+
+The tidied data was then grouped by activity and subjectId to determine the mean for each variable.
+
+The tidy data contains 180 objects and 68 variables.
+
+
+## Variables in Raw and Tidy datasets
+
+   Raw Variables              | Tidy Variables
+   ---------------------------|------------------------
+1                     activity|                activity
+2                    subjectId|               subjectId
+3            tBodyAcc-mean()-X|           tBodyAccMeanX
+4            tBodyAcc-mean()-Y|          tBodyAccMeanY
+5            tBodyAcc-mean()-Z|           tBodyAccMeanZ
+6             tBodyAcc-std()-X|            tBodyAccStdX
+7             tBodyAcc-std()-Y|            tBodyAccStdY
+8             tBodyAcc-std()-Z|            tBodyAccStdZ
+9         tGravityAcc-mean()-X|        tGravityAccMeanX
+10        tGravityAcc-mean()-Y|        tGravityAccMeanY
+11        tGravityAcc-mean()-Z|        tGravityAccMeanZ
+12         tGravityAcc-std()-X|         tGravityAccStdX
+13         tGravityAcc-std()-Y|         tGravityAccStdY
+14         tGravityAcc-std()-Z|         tGravityAccStdZ
+15       tBodyAccJerk-mean()-X|       tBodyAccJerkMeanX
+16       tBodyAccJerk-mean()-Y|       tBodyAccJerkMeanY
+17       tBodyAccJerk-mean()-Z|       tBodyAccJerkMeanZ
+18        tBodyAccJerk-std()-X|        tBodyAccJerkStdX
+19        tBodyAccJerk-std()-Y|        tBodyAccJerkStdY
+20        tBodyAccJerk-std()-Z|        tBodyAccJerkStdZ
+21          tBodyGyro-mean()-X|          tBodyGyroMeanX
+22          tBodyGyro-mean()-Y|          tBodyGyroMeanY
+23          tBodyGyro-mean()-Z|          tBodyGyroMeanZ
+24           tBodyGyro-std()-X|           tBodyGyroStdX
+25           tBodyGyro-std()-Y|           tBodyGyroStdY
+26           tBodyGyro-std()-Z|           tBodyGyroStdZ
+27      tBodyGyroJerk-mean()-X|      tBodyGyroJerkMeanX
+28      tBodyGyroJerk-mean()-Y|      tBodyGyroJerkMeanY
+29      tBodyGyroJerk-mean()-Z|      tBodyGyroJerkMeanZ
+30       tBodyGyroJerk-std()-X|       tBodyGyroJerkStdX
+31       tBodyGyroJerk-std()-Y|       tBodyGyroJerkStdY
+32       tBodyGyroJerk-std()-Z|       tBodyGyroJerkStdZ
+33          tBodyAccMag-mean()|         tBodyAccMagMean
+34           tBodyAccMag-std()|          tBodyAccMagStd
+35       tGravityAccMag-mean()|      tGravityAccMagMean
+36        tGravityAccMag-std()|       tGravityAccMagStd
+37      tBodyAccJerkMag-mean()|     tBodyAccJerkMagMean
+38       tBodyAccJerkMag-std()|      tBodyAccJerkMagStd
+39         tBodyGyroMag-mean()|        tBodyGyroMagMean
+40          tBodyGyroMag-std()|         tBodyGyroMagStd
+41     tBodyGyroJerkMag-mean()|    tBodyGyroJerkMagMean
+42      tBodyGyroJerkMag-std()|     tBodyGyroJerkMagStd
+43           fBodyAcc-mean()-X|           fBodyAccMeanX
+44           fBodyAcc-mean()-Y|           fBodyAccMeanY
+45           fBodyAcc-mean()-Z|           fBodyAccMeanZ
+46            fBodyAcc-std()-X|            fBodyAccStdX
+47            fBodyAcc-std()-Y|            fBodyAccStdY
+48            fBodyAcc-std()-Z|            fBodyAccStdZ
+49       fBodyAccJerk-mean()-X|       fBodyAccJerkMeanX
+50       fBodyAccJerk-mean()-Y|       fBodyAccJerkMeanY
+51       fBodyAccJerk-mean()-Z|       fBodyAccJerkMeanZ
+52        fBodyAccJerk-std()-X|        fBodyAccJerkStdX
+53        fBodyAccJerk-std()-Y|        fBodyAccJerkStdY
+54        fBodyAccJerk-std()-Z|        fBodyAccJerkStdZ
+55          fBodyGyro-mean()-X|          fBodyGyroMeanX
+56          fBodyGyro-mean()-Y|          fBodyGyroMeanY
+57          fBodyGyro-mean()-Z|          fBodyGyroMeanZ
+58           fBodyGyro-std()-X|           fBodyGyroStdX
+59           fBodyGyro-std()-Y|           fBodyGyroStdY
+60           fBodyGyro-std()-Z|           fBodyGyroStdZ
+61          fBodyAccMag-mean()|         fBodyAccMagMean
+62           fBodyAccMag-std()|          fBodyAccMagStd
+63  fBodyBodyAccJerkMag-mean()|     fBodyAccJerkMagMean
+64   fBodyBodyAccJerkMag-std()|      fBodyAccJerkMagStd
+65     fBodyBodyGyroMag-mean()|        fBodyGyroMagMean
+66      fBodyBodyGyroMag-std()|         fBodyGyroMagStd
+67 fBodyBodyGyroJerkMag-mean()|    fBodyGyroJerkMagMean
+68  fBodyBodyGyroJerkMag-std()|     fBodyGyroJerkMagStd
+
+==================================================================
+
+
+^1^ Human Activity Recognition Using Smartphones Dataset
+Version 1.0
+Davide Anguita, Alessandro Ghio, Luca Oneto, Xavier Parra and Jorge L. Reyes-Ortiz. Human Activity Recognition on Smartphones using a Multiclass Hardware-Friendly Support Vector Machine. International Workshop of Ambient Assisted Living (IWAAL 2012). Vitoria-Gasteiz, Spain. Dec 2012
+
+For more information about the UCI HAR dataset contact: activityrecognition@smartlab.ws
+
